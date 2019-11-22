@@ -2,7 +2,9 @@ package biblioteca.model;
 
 import biblioteca.util.lista.*;
 
-public class Cliente {
+import java.io.Serializable;
+
+public class Cliente implements Serializable {
 	private String nome, endereco, cpf, codigo;
 	private Lista<Livro> livros;
 	

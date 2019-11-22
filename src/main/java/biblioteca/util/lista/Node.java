@@ -1,6 +1,8 @@
 package biblioteca.util.lista;
 
-public class Node<T> {
+import java.io.Serializable;
+
+public class Node<T> implements Serializable {
 	private Node<T> proximo;
 	private T atual;
 	
