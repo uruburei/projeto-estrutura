@@ -2,6 +2,7 @@ package biblioteca.controler;
 import biblioteca.model.*;
 import biblioteca.service.Banco;
 import biblioteca.util.lista.*;
+import biblioteca.util.arvore.*;
 import com.google.gson.Gson;
 import spark.Request;
 
@@ -13,20 +14,20 @@ public class ClienteControler {
 
 	public static String criarCliente(Request req) {
 		try{
-			Lista<Cliente> list;
+			Arvore<Cliente> tree;
 
 			File x = new File(path);
 			if(x.isFile()){
-				list = (Lista<Cliente>) Banco.deserializar(path);
+				tree = (Arvore<Cliente>) Banco.deserializar(path);
 			}else {
-				list = new Lista();
+				tree = new Arvore();
 			}
 
 			Cliente cliente = new Gson().fromJson(req.body(),Cliente.class);
-			Node<Cliente> clientNote = new Node<>(cliente);
-			list.inserirNocomeco(clientNote);
-			list.imprimirLista();
-			Banco.serializar(list,path);
+			//Node2<Cliente> clientNote = new Node2<>(cliente);
+			tree.add(cliente);
+			tree.view();
+			Banco.serializar(tree,path);
 			return new Gson().toJson(cliente);
 		}catch (Exception err) {
 			String status = "Erro";
@@ -36,9 +37,9 @@ public class ClienteControler {
 
 	public static String removerCliente(Request req){
 		try{
-			Lista<Cliente> list = (Lista<Cliente>) Banco.deserializar(path);
+			Arvore<Cliente> tree = (Arvore<Cliente>) Banco.deserializar(path);
 			Cliente body = new Gson().fromJson(req.body(),Cliente.class);
-			Node<Cliente> aux = list.primeiro;
+			/*Node<Cliente> aux = list.primeiro;
 			int i = 0;
 			while(aux.getProximo() != null) {
 				i++;
@@ -46,9 +47,9 @@ public class ClienteControler {
 					break;
 				}
 				aux = aux.getProximo();
-			}
-			list.removerPosicao(i);
-			Banco.serializar(list,path);
+			}*/
+			tree.remove(body);
+			Banco.serializar(tree,path);
 			String status = "OK";
 			return new Gson().toJson(status);
 		}catch (Exception err){
@@ -58,5 +59,7 @@ public class ClienteControler {
 		}
 
 	}
+	
+	
 
 }

@@ -1,29 +1,29 @@
 package biblioteca.util.arvore;
 
-public class Node<T> {
-	private Node<T> left;
-	private Node<T> right;
+public class Node2<T> {
+	private Node2<T> left;
+	private Node2<T> right;
 	private T nome;
 
-	public Node(T nome) {
+	public Node2(T nome) {
 		this.nome = nome;
 		this.setLeft(null);
 		this.setRight(null);
 	}
 
-	public Node getLeft() {
+	public Node2 getLeft() {
 		return left;
 	}
 
-	public void setLeft(Node left) {
+	public void setLeft(Node2 left) {
 		this.left = left;
 	}
 
-	Node getRight() {
+	Node2 getRight() {
 		return right;
 	}
 
-	public void setRight(Node right) {
+	public void setRight(Node2 right) {
 		this.right = right;
 	}
 	public T getNome() {

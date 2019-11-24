@@ -1,7 +1,7 @@
 package biblioteca.util.arvore;
 
 public class Arvore<T> {
-	Node<T> root;
+	Node2<T> root;
 	int qntNode = 0;
 
 	public Arvore() {
@@ -22,10 +22,10 @@ public class Arvore<T> {
 		}
 	}
 
-	private void add(Node<T> node, T nome) {
+	private void add(Node2<T> node, T nome) {
 		// Metodo recursivo
 		if (node == null) {
-			root = new Node(nome);
+			root = new Node2(nome);
 			System.out.println("'" + nome + "' is the new groot");
 
 		} else {
@@ -34,7 +34,7 @@ public class Arvore<T> {
 					add(node.getLeft(), nome);
 				} else {
 					System.out.println("'" + nome + "' on the left of '" + node.getNome() + "'");
-					node.setLeft(new Node(nome));
+					node.setLeft(new Node2(nome));
 				}
 			}
 
@@ -43,7 +43,7 @@ public class Arvore<T> {
 					add(node.getRight(), nome);
 				} else {
 					System.out.println("'" + nome + "' on the right of '" + node.getNome() + "'");
-					node.setRight(new Node(nome));
+					node.setRight(new Node2(nome));
 				}
 			} else if (nome == node.getNome()) {
 				System.out.println("'" + nome + "' already exists!");
@@ -51,16 +51,16 @@ public class Arvore<T> {
 		}
 	}
 
-	private void view(Node node) {
+	private void view(Node2 node2) {
 		// Metodo recursivo
-		if (node.getLeft() != null) {
-			view(node.getLeft());
+		if (node2.getLeft() != null) {
+			view(node2.getLeft());
 		}
-		if (node.getRight() != null) {
-			view(node.getRight());
+		if (node2.getRight() != null) {
+			view(node2.getRight());
 		}
 		qntNode++;
-		System.out.println(" Node" + qntNode + ": '" + node.getNome() + "'");
+		System.out.println(" Node" + qntNode + ": '" + node2.getNome() + "'");
 	}
 
 	public int getTotalNodes() {
@@ -71,16 +71,16 @@ public class Arvore<T> {
 	public void remove(T value)  {
 		remove(root, value);
 	}
-	private void remove(Node node, T value) {
+	private void remove(Node2 node2, T value) {
 		
-		if (value != node.getNome() ) {
-			remove(node.getLeft(), value);
-			remove(node.getRight(), value);
+		if (value != node2.getNome() ) {
+			remove(node2.getLeft(), value);
+			remove(node2.getRight(), value);
 						
 			} else {
-				if (node.getLeft() == null && node.getRight() == null) {
-					System.out.println(node.getNome()+" removed.");
-					node = null;
+				if (node2.getLeft() == null && node2.getRight() == null) {
+					System.out.println(node2.getNome()+" removed.");
+					node2 = null;
 					qntNode--;
 				}
 			}
