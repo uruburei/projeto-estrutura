@@ -6,7 +6,8 @@ public class App
 {
     public static void main( String[] args )
     {
-    	
-        get("/hello", (req, res) -> ClienteControler.ciarCliente(req));
+        port(3333);
+        post("/client", (req, res) ->{res.type("application/json"); return ClienteControler.criarCliente(req);});
+        delete("/client", (req, res) ->{res.type("application/json"); return ClienteControler.removerCliente(req);});
     }
 }

@@ -1,8 +1,10 @@
 package biblioteca.util.lista;
 
-public class Lista<T> {
-	int qtdelementos;
-	Node<T> primeiro, ultimo;
+import java.io.Serializable;
+
+public class Lista<T> implements Serializable {
+	public int qtdelementos;
+	public Node<T> primeiro, ultimo;
 	
 	public Lista() {
 		this.qtdelementos = 0;
