@@ -49,9 +49,9 @@ public class Cliente implements Serializable {
 	}
 
 	public String toString() {
-		return "Cliente:\nnome= " + nome + "\nendereco= " + endereco + "\ncpf= " + cpf + "\ncodigo= " + codigo + ".";
+		return cpf;
 	}
-	
+//	return "Cliente:\nnome= " + nome + "\nendereco= " + endereco + "\ncpf= " + cpf + "\ncodigo= " + codigo + ".";
 	public void alugarLivro(Node<Livro> livro) {
 		livros.inserirNocomeco(livro);
 	}

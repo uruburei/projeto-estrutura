@@ -8,6 +8,6 @@ public class App
     {
         port(3333);
         post("/client", (req, res) ->{res.type("application/json"); return ClienteControler.criarCliente(req);});
-        delete("/client", (req, res) ->{res.type("application/json"); return ClienteControler.removerCliente(req);});
+        post("/client/login", (req, res) ->{res.type("application/json"); return ClienteControler.indexCliente(req);});
     }
 }

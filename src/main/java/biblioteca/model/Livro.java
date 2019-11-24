@@ -1,6 +1,8 @@
 package biblioteca.model;
 
-public class Livro {
+import java.io.Serializable;
+
+public class Livro implements Serializable {
 	private String nome, codigo, genero;
 	private int quantidadepaginas;
 	

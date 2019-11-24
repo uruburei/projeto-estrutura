@@ -1,6 +1,8 @@
 package biblioteca.util.arvore;
 
-public class Node2<T> {
+import java.io.Serializable;
+
+public class Node2<T> implements Serializable {
 	private Node2<T> left;
 	private Node2<T> right;
 	private T nome;
