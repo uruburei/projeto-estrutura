@@ -1,5 +1,7 @@
 package biblioteca.util.arvore;
 
+import com.google.gson.Gson;
+
 import java.io.Serializable;
 
 public class Arvore<T> implements Serializable {
@@ -61,6 +63,7 @@ public class Arvore<T> implements Serializable {
 	}
 
 	private void find(Node2 node2,T value){
+		index = null;
 		if(Integer.parseInt(node2.getNome().toString()) != Integer.parseInt(value.toString())){
 			if (node2.getLeft() != null)
 				find(node2.getLeft(),value);
@@ -68,6 +71,21 @@ public class Arvore<T> implements Serializable {
 				find(node2.getRight(),value);
 		}else {
 			index= (T) node2.getNome();
+		}
+	}
+
+	public void update(T value){
+		update(root,value);
+	}
+
+	private void update(Node2 node2,T value){
+		if(Integer.parseInt(node2.getNome().toString()) != Integer.parseInt(value.toString())){
+			if (node2.getLeft() != null)
+				update(node2.getLeft(),value);
+			if (node2.getRight() != null)
+				update(node2.getRight(),value);
+		}else {
+			node2.setNome(value);
 		}
 	}
 

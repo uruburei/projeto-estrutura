@@ -51,7 +51,7 @@ public class Cliente implements Serializable {
 	public String toString() {
 		return cpf;
 	}
-//	return "Cliente:\nnome= " + nome + "\nendereco= " + endereco + "\ncpf= " + cpf + "\ncodigo= " + codigo + ".";
+
 	public void alugarLivro(Node<Livro> livro) {
 		livros.inserirNocomeco(livro);
 	}
@@ -63,6 +63,5 @@ public class Cliente implements Serializable {
 	public void removerLivro(Node<Livro> livro) {
 		livros.removerPosicao(livros.pesquisarElemento(livro));
 	}
-	
 
 }

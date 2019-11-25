@@ -41,8 +41,29 @@ public class ClienteControler {
 			Cliente requisicao = new Gson().fromJson(req.body(),Cliente.class);
 
 			tree.find(requisicao);
-            System.out.println(tree.index);
 			if(tree.index != null) {
+				return new Gson().toJson(tree.index);
+			}else {
+				String status = "Cliente não existe";
+				return new Gson().toJson(status);
+			}
+		}catch (Exception err){
+			err.printStackTrace();
+			String status = "Erro";
+			return new Gson().toJson(status);
+		}
+	}
+
+	public static String atualizarCliente(Request req){
+		try {
+			Arvore<Cliente> tree = (Arvore<Cliente>) Banco.deserializar(path);
+
+			Cliente requisicao = new Gson().fromJson(req.body(),Cliente.class);
+			tree.update(requisicao);
+
+			tree.find(requisicao);
+			if(tree.index != null) {
+                Banco.serializar(tree,path);
 				return new Gson().toJson(tree.index);
 			}else {
 				String status = "Cliente não existe";

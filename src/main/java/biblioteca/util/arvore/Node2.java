@@ -32,6 +32,10 @@ public class Node2<T> implements Serializable {
 		return nome;
 	}
 
+	public void setNome(T nome){
+		this.nome = nome;
+	}
+
 	public String toString() {
 		return "Node [esquerda=" + left + ", direita=" + right + ", nome=" + nome + "]";
 	}
