@@ -12,7 +12,27 @@ public class Lista<T> implements Serializable {
 		this.ultimo = null;
 	}
 	
-	public void inserirNocomeco(Node<T> objeto) {
+	public void inserirNocomeco(T objeto) {
+		Node<T> node = new Node<T>(objeto);
+		inserirNocomeco(node);
+	}
+	
+	public void inserirNoFinal(T objeto) {
+		Node<T> node = new Node<T>(objeto);
+		inserirNoFinal(node);
+	}
+	
+	public void inserirQualquerPosicao(int posicao, T objeto) {
+		Node<T> node = new Node<T>(objeto);
+		inserirQualquerPosicao(posicao, node);
+	}
+	
+	public int pesquisarElemento(T objeto) {
+		Node<T> node = new Node<T>(objeto);
+		return pesquisarElemento(node);
+	}
+	
+	private void inserirNocomeco(Node<T> objeto) {
 		if(this.qtdelementos == 0) {
 			this.ultimo  = this.primeiro;
 			Node<T> novo = objeto;
@@ -26,7 +46,7 @@ public class Lista<T> implements Serializable {
 		this.qtdelementos++;
 	}
 	
-	public void inserirNoFinal(Node<T> objeto) {
+	private void inserirNoFinal(Node<T> objeto) {
 		if(this.qtdelementos == 0) {
 			this.ultimo  = this.primeiro;
 			Node<T> novo = objeto;
@@ -40,7 +60,7 @@ public class Lista<T> implements Serializable {
 		this.qtdelementos++;
 	}
 	
-	public void inserirQualquerPosicao(int posicao, Node<T> objeto) {
+	private void inserirQualquerPosicao(int posicao, Node<T> objeto) {
 		Node<T> novo = objeto;
 		Node<T> aux = this.primeiro;
 		if(posicao < 0 || posicao > this.qtdelementos) {
@@ -109,7 +129,7 @@ public class Lista<T> implements Serializable {
 		}
 	}
 	
-	public int pesquisarElemento(Node<T> objeto) {
+	private int pesquisarElemento(Node<T> objeto) {
 		Node<T> aux = this.primeiro;
 		int i = 0;
 		while(aux.getProximo() != null) {
@@ -135,5 +155,18 @@ public class Lista<T> implements Serializable {
 			System.out.println(aux + "]");
 		}
 		
+	}
+	
+	public void ordenarLista() {
+		if(Integer.parseInt(primeiro.getAtual().toString()) < Integer.parseInt(primeiro.getProximo().toString())) {
+			inserirNocomeco(primeiro.getProximo());
+			ordenarLista();
+		}
+		else if (Integer.parseInt(primeiro.getAtual().toString()) > Integer.parseInt(primeiro.getProximo().toString())) {
+			ordenarLista();
+		}
+		else {
+			imprimirLista();
+		}
 	}
 }

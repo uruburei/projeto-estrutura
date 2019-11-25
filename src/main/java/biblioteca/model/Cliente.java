@@ -52,7 +52,7 @@ public class Cliente implements Serializable {
 		return cpf;
 	}
 
-	public void alugarLivro(Node<Livro> livro) {
+	public void alugarLivro(Livro livro) {
 		livros.inserirNocomeco(livro);
 	}
 	
@@ -60,7 +60,7 @@ public class Cliente implements Serializable {
 		livros.imprimirLista();
 	}
 	
-	public void removerLivro(Node<Livro> livro) {
+	public void removerLivro(Livro livro) {
 		livros.removerPosicao(livros.pesquisarElemento(livro));
 	}
 

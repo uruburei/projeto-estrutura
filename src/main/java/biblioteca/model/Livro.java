@@ -47,8 +47,7 @@ public class Livro implements Serializable {
 
 	@Override
 	public String toString() {
-		return "Livro: \nnome=" + nome + "\ncodigo=" + codigo + "\ngenero=" + genero + "\nquantidadepaginas="
-				+ quantidadepaginas + ".";
+		return Integer.toString(quantidadepaginas);
 	}
 	
 	
