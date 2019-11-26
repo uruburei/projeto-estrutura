@@ -1,7 +1,8 @@
 package biblioteca.controler;
 import biblioteca.model.*;
 import biblioteca.service.Banco;
-import biblioteca.util.arvore.*;
+import biblioteca.util.lista.Lista;
+
 import com.google.gson.Gson;
 import spark.Request;
 
@@ -14,19 +15,19 @@ public class ClienteControler {
 
 	public static String criarCliente(Request req) {
 		try{
-			Arvore<Cliente> tree;
+			Lista<Cliente> list;
 
 			File x = new File(path);
 			if(x.isFile()){
-				tree = (Arvore<Cliente>) Banco.deserializar(path);
+				list = (Lista<Cliente>) Banco.deserializar(path);
 			}else {
-				tree = new Arvore();
+				list = new Lista();
 			}
 
 			Cliente cliente = new Gson().fromJson(req.body(),Cliente.class);
 
-			tree.add(cliente);
-			Banco.serializar(tree,path);
+			list.inserirNocomeco(cliente);
+			Banco.serializar(list,path);
 			return new Gson().toJson(cliente);
 		}catch (Exception err) {
 			err.printStackTrace();
@@ -37,12 +38,12 @@ public class ClienteControler {
 
 	public static String procurarCliente(Request req){
 		try{
-			Arvore<Cliente> tree = (Arvore<Cliente>) Banco.deserializar(path);
+			Lista<Cliente> list = (Lista<Cliente>) Banco.deserializar(path);
 
 			Cliente requisicao = new Gson().fromJson(req.body(),Cliente.class);
 
-			tree.find(requisicao);
-			if(tree.index != null) {
+			list.pesquisarElemento(requisicao);
+			if(list.index != null) {
 				return new Gson().toJson(tree.index);
 			}else {
 				String status = "Cliente não existe";
@@ -55,21 +56,16 @@ public class ClienteControler {
 		}
 	}
 
-	public static String atualizarCliente(Request req){
+	public static String atualizarCliente(int posicao, Request req){
 		try {
-			Arvore<Cliente> tree = (Arvore<Cliente>) Banco.deserializar(path);
+			Lista<Cliente> list = (Lista<Cliente>) Banco.deserializar(path);
 
 			Cliente requisicao = new Gson().fromJson(req.body(),Cliente.class);
-			tree.update(requisicao);
+			list.atializarLista(posicao,requisicao);
 
-			tree.find(requisicao);
-			if(tree.index != null) {
-                Banco.serializar(tree,path);
-				return new Gson().toJson(tree.index);
-			}else {
-				String status = "Cliente não existe";
-				return new Gson().toJson(status);
-			}
+                Banco.serializar(list,path);
+				return new Gson().toJson(list);
+
 		}catch (Exception err){
 			err.printStackTrace();
 			String status = "Erro";

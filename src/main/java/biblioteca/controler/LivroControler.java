@@ -5,8 +5,9 @@ import spark.Request;
 
 import java.io.File;
 
+import biblioteca.model.Cliente;
 import biblioteca.model.Livro;
-import biblioteca.util.lista.Lista;
+import biblioteca.util.arvore.Arvore;
 
 
 public class LivroControler {
@@ -14,18 +15,18 @@ public class LivroControler {
 
     public static String criarLivro(Request req){
         try{
-            Lista<Livro> list;
+            Arvore<Livro> tree;
 
             File x = new File(path);
             if(x.isFile()){
-                list = (Lista<Livro>) Banco.deserializar(path);
+                tree = (Arvore<Livro>) Banco.deserializar(path);
             }else {
-                list = new Lista<>();
+                tree = new Arvore<>();
             }
 
             Livro livro = new Gson().fromJson(req.body(),Livro.class);
-            list.inserirNocomeco(livro);
-            Banco.serializar(list,path);
+            tree.add(livro);
+            Banco.serializar(tree,path);
             return new Gson().toJson(livro);
         }catch (Exception err){
             err.printStackTrace();
@@ -35,26 +36,29 @@ public class LivroControler {
     }
 
     public static String procurarLivro(Request req){
-        try{
-            Lista<Livro> list = (Lista<Livro>) Banco.deserializar(path);
-            Livro found = (Livro) list.pesquisarElemento(req.params("nome"));
-            if(found != null){
-                return new Gson().toJson(found);
-            }else {
-                String status = "Livro não existe";
-                return new Gson().toJson(status);
-            }
-        }catch (Exception err){
-            err.printStackTrace();
-            String status = "Erro";
-            return new Gson().toJson(status);
-        }
+    	try{
+			Arvore<Livro> tree = (Arvore<Livro>) Banco.deserializar(path);
+
+			Livro requisicao = new Gson().fromJson(req.body(),Livro.class);
+
+			tree.find(requisicao);
+			if(tree.index != null) {
+				return new Gson().toJson(tree.index);
+			}else {
+				String status = "Cliente não existe";
+				return new Gson().toJson(status);
+			}
+		}catch (Exception err){
+			err.printStackTrace();
+			String status = "Erro";
+			return new Gson().toJson(status);
+		}
     }
 
     public static String listaLivros(Request req){
         try{
-            Lista<Livro> list = (Lista<Livro>) Banco.deserializar(path);
-            return new Gson().toJson(list);
+            Arvore<Livro> tree = (Arvore<Livro>) Banco.deserializar(path);
+            return new Gson().toJson(tree);
         }catch (Exception err){
             err.printStackTrace();
             String status = "Erro";
@@ -62,15 +66,5 @@ public class LivroControler {
         }
     }
 
-    public static String ordenarLista(Request req){
-        try{
-            Lista<Livro> list = (Lista<Livro>) Banco.deserializar(path);
-            list.ordenarLista();
-            return new Gson().toJson(list);
-        }catch (Exception err){
-            err.printStackTrace();
-            String status = "Erro";
-            return new Gson().toJson(status);
-        }
-    }
+    
 }

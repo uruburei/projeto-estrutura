@@ -12,6 +12,10 @@ public class Livro implements Serializable {
 		this.genero = genero;
 		this.quantidadepaginas = quantidadepaginas;
 	}
+	
+	public Livro(String nome) {
+		this.nome = nome;
+	}
 
 	public String getNome() {
 		return nome;

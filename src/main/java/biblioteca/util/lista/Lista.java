@@ -159,10 +159,6 @@ public class Lista<T> implements Serializable {
 				primeiro.getProximo().setAtual(aux);
 			}
 		}
-
-
-
-
 //		int i=0;
 //		Node<T> aux = primeiro.getProximo().getProximo();
 //		primeiro.getProximo();
@@ -190,6 +186,11 @@ public class Lista<T> implements Serializable {
 //			imprimirLista();
 //		}
 //		imprimirLista();
+	}
+	
+	public void atializarLista(int posição, T valor) {
+		removerPosicao(posição);
+		inserirQualquerPosicao(posição, valor);
 	}
 }
 
