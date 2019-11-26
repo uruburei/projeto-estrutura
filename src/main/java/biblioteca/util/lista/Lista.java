@@ -27,11 +27,6 @@ public class Lista<T> implements Serializable {
 		inserirQualquerPosicao(posicao, node);
 	}
 	
-	public int pesquisarElemento(T objeto) {
-		Node<T> node = new Node<T>(objeto);
-		return pesquisarElemento(node);
-	}
-	
 	private void inserirNocomeco(Node<T> objeto) {
 		if(this.qtdelementos == 0) {
 			this.ultimo  = this.primeiro;
@@ -51,7 +46,7 @@ public class Lista<T> implements Serializable {
 			this.ultimo  = this.primeiro;
 			Node<T> novo = objeto;
 			novo.setProximo(ultimo);
-			this.ultimo = novo;
+			this.primeiro = novo;
 		}else {
 			Node<T> novo2 = objeto;
 			novo2.setProximo(ultimo);
@@ -99,9 +94,9 @@ public class Lista<T> implements Serializable {
 		}else {
 			Node<T> aux = primeiro;
 			while(aux.getProximo() != null){
-				aux.getProximo();
+				aux=aux.getProximo();
 			}
-			aux.setProximo(null);
+			aux.setAtual(null);
 			this.qtdelementos--;
 		}
 		
@@ -128,18 +123,17 @@ public class Lista<T> implements Serializable {
 			}
 		}
 	}
-	
-	private int pesquisarElemento(Node<T> objeto) {
+
+	public Object pesquisarElemento(String nome) {
 		Node<T> aux = this.primeiro;
-		int i = 0;
+		T found = null;
 		while(aux.getProximo() != null) {
-			i++;
-			if(aux == objeto) {
-				return i;
+			if(aux.getProximo().toString().equals(nome)) {
+				found = aux.getAtual();
 			}
-			aux = aux.getProximo();
+				aux = aux.getProximo();
 		}
-		return i;
+		return found;
 	}
 	
 	public void imprimirLista() {
@@ -158,15 +152,45 @@ public class Lista<T> implements Serializable {
 	}
 	
 	public void ordenarLista() {
-		if(Integer.parseInt(primeiro.getAtual().toString()) < Integer.parseInt(primeiro.getProximo().toString())) {
-			inserirNocomeco(primeiro.getProximo());
-			ordenarLista();
+		for (int i = 0; i != qtdelementos; i++) {
+			if(primeiro.getAtual().toString().charAt(i) > primeiro.getProximo().getAtual().toString().charAt(i)){
+				Node<T> aux = primeiro.getProximo();
+				primeiro.setAtual((T)primeiro.getProximo().getAtual());
+				primeiro.getProximo().setAtual(aux);
+			}
 		}
-		else if (Integer.parseInt(primeiro.getAtual().toString()) > Integer.parseInt(primeiro.getProximo().toString())) {
-			ordenarLista();
-		}
-		else {
-			imprimirLista();
-		}
+
+
+
+
+//		int i=0;
+//		Node<T> aux = primeiro.getProximo().getProximo();
+//		primeiro.getProximo();
+//		primeiro.getAtual();
+//		while (aux.getProximo() != null){
+//			if(aux.getAtual().toString().charAt(i) > aux.getProximo().toString().charAt(i)) {
+//				aux.setProximo(aux);
+//			}else if(aux.getAtual().toString().charAt(i) == aux.getProximo().toString().charAt(i)){
+//				i++;
+//			}
+//			aux = aux.getProximo();
+//		}
+//		imprimirLista();
+//		if(primeiro.getAtual().toString().charAt(0) > primeiro.getProximo().toString().charAt(0)) {
+//
+//			System.out.println("menor");
+//
+//			ordenarLista();
+//		}
+//		if (primeiro.getAtual().toString().charAt(0) < primeiro.getProximo().toString().charAt(0)) {
+//			ordenarLista();
+//			System.out.println("maior");
+//		}
+//		if(primeiro.getAtual().toString().charAt(0) == primeiro.getProximo().toString().charAt(0)){
+//			imprimirLista();
+//		}
+//		imprimirLista();
 	}
 }
+
+

@@ -5,14 +5,13 @@ import biblioteca.util.lista.*;
 import java.io.Serializable;
 
 public class Cliente implements Serializable {
-	private String nome, endereco, cpf, codigo;
+	private String nome, endereco, cpf;
 	private Lista<Livro> livros;
 	
 	public Cliente(String nome, String endereco, String cpf, String codigo) {
 		this.nome = nome;
 		this.endereco = endereco;
 		this.cpf = cpf;
-		this.codigo = codigo;
 		livros = new Lista<Livro>();
 	}
 
@@ -40,14 +39,6 @@ public class Cliente implements Serializable {
 		this.cpf = cpf;
 	}
 
-	public String getCodigo() {
-		return codigo;
-	}
-
-	public void setCodigo(String codigo) {
-		this.codigo = codigo;
-	}
-
 	public String toString() {
 		return cpf;
 	}
@@ -59,9 +50,9 @@ public class Cliente implements Serializable {
 	public void verLivrosAlugados() {
 		livros.imprimirLista();
 	}
-	
-	public void removerLivro(Livro livro) {
-		livros.removerPosicao(livros.pesquisarElemento(livro));
-	}
+
+//	public void removerLivro(Livro livro) {
+//		livros.removerPosicao(livros.pesquisarElemento(livro.toString()));
+//	}
 
 }

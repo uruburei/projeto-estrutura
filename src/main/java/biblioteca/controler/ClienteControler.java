@@ -9,7 +9,8 @@ import java.io.File;
 
 
 public class ClienteControler {
-	static public String path = ".\\arvore.txt";
+
+	static public String path = ".\\Clientes.txt";
 
 	public static String criarCliente(Request req) {
 		try{
@@ -34,7 +35,7 @@ public class ClienteControler {
 		}
 	}
 
-	public static String indexCliente(Request req){
+	public static String procurarCliente(Request req){
 		try{
 			Arvore<Cliente> tree = (Arvore<Cliente>) Banco.deserializar(path);
 

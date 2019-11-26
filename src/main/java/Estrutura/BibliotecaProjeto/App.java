@@ -1,6 +1,7 @@
 package Estrutura.BibliotecaProjeto;
 import static spark.Spark.*;
 import biblioteca.controler.ClienteControler;
+import biblioteca.controler.LivroControler;
 
 public class App 
 {
@@ -8,12 +9,19 @@ public class App
     {
         port(3333);
         //Criar Cliente
-        post("/client", (req, res) ->{res.type("application/json"); return ClienteControler.criarCliente(req);});
+        post("/cliente", (req, res) ->{res.type("application/json"); return ClienteControler.criarCliente(req);});
         //Procurar Cliente(cpf)
-        post("/client/login", (req, res) ->{res.type("application/json"); return ClienteControler.indexCliente(req);});
+        post("/cliente/login", (req, res) ->{res.type("application/json"); return ClienteControler.procurarCliente(req);});
         //Atualizar Cliente(cpf)
-        put("/client", (req, res) ->{res.type("application/json"); return ClienteControler.atualizarCliente(req);});
+        put("/cliente", (req, res) ->{res.type("application/json"); return ClienteControler.atualizarCliente(req);});
 
-
+        //Listar Livro
+        get("/livro", (req, res) ->{res.type("application/json"); return LivroControler.listaLivros(req);});
+        //Criar Livro
+        post("/livro", (req, res) ->{res.type("application/json"); return LivroControler.criarLivro(req);});
+        //Procurar Livro(nome)
+        get("/livro/:nome", (req, res) ->{res.type("application/json"); return LivroControler.procurarLivro(req);});
+        //Ordenar Livros
+        get("/livro/orde/",(req, res) ->{res.type("application/json"); return LivroControler.ordenarLista(req);});
     }
 }

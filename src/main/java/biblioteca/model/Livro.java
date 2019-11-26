@@ -47,10 +47,7 @@ public class Livro implements Serializable {
 
 	@Override
 	public String toString() {
-		return Integer.toString(quantidadepaginas);
+		return nome;
 	}
-	
-	
-	
 	
 }

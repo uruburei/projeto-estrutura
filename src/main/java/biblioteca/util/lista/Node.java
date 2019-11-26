@@ -5,14 +5,10 @@ import java.io.Serializable;
 public class Node<T> implements Serializable {
 	private Node<T> proximo;
 	private T atual;
-	
-	
 
 	public Node(T atual) {
 		this.atual = atual;
 	}
-	
-	
 
 	public T getAtual() {
 		return atual;
@@ -30,12 +26,8 @@ public class Node<T> implements Serializable {
 		return proximo;
 	}
 
-	
 	public String toString() {
 		return "[proximo=" + atual + "]\n";
 	}
-	
-	
-	
-	
+
 }
