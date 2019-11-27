@@ -103,19 +103,17 @@ public class Lista<T> implements Serializable {
 	}
 	
 	public void removerPosicao(int posicao) {
-		if(posicao < 0 || posicao >this.qtdelementos) {
+		if(posicao >this.qtdelementos) {
 			System.out.println("posicao invalida");
 		}
 		if(posicao == this.qtdelementos) {
-			removerNoFinal();
-		}else if (posicao == 1) {
 			removerNoInicio();
 		}else if (posicao == 0) {
-			System.out.println("lista vazia");
+			removerNoFinal();
 		}else {
 			Node<T> aux = primeiro;
 			for(int i =0; i < posicao; i++) {
-				if (i == posicao -2) {
+				if (i == posicao -1) {
 					aux.setProximo(aux.getProximo().getProximo());
 					this.qtdelementos--;
 				}
@@ -128,14 +126,28 @@ public class Lista<T> implements Serializable {
 		Node<T> aux = this.primeiro;
 		T found = null;
 		while(aux.getProximo() != null) {
-			if(aux.getProximo().toString().equals(nome)) {
+			if(aux.getAtual().toString().equals(nome)) {
 				found = aux.getAtual();
 			}
 				aux = aux.getProximo();
 		}
 		return found;
 	}
-	
+
+	public int pesquisarPosicao(String nome) {
+		Node<T> aux = this.primeiro;
+		int i = 0;
+		int found=0;
+		while(aux.getProximo() != null) {
+			if(aux.getAtual().toString().equals(nome)) {
+				found = i;
+			}
+			aux = aux.getProximo();
+			i++;
+		}
+		return found;
+	}
+
 	public void imprimirLista() {
 		if(this.qtdelementos == 0) {
 			System.out.println("[]");
@@ -151,46 +163,11 @@ public class Lista<T> implements Serializable {
 		
 	}
 	
-	public void ordenarLista() {
-		for (int i = 0; i != qtdelementos; i++) {
-			if(primeiro.getAtual().toString().charAt(i) > primeiro.getProximo().getAtual().toString().charAt(i)){
-				Node<T> aux = primeiro.getProximo();
-				primeiro.setAtual((T)primeiro.getProximo().getAtual());
-				primeiro.getProximo().setAtual(aux);
-			}
-		}
-//		int i=0;
-//		Node<T> aux = primeiro.getProximo().getProximo();
-//		primeiro.getProximo();
-//		primeiro.getAtual();
-//		while (aux.getProximo() != null){
-//			if(aux.getAtual().toString().charAt(i) > aux.getProximo().toString().charAt(i)) {
-//				aux.setProximo(aux);
-//			}else if(aux.getAtual().toString().charAt(i) == aux.getProximo().toString().charAt(i)){
-//				i++;
-//			}
-//			aux = aux.getProximo();
-//		}
-//		imprimirLista();
-//		if(primeiro.getAtual().toString().charAt(0) > primeiro.getProximo().toString().charAt(0)) {
-//
-//			System.out.println("menor");
-//
-//			ordenarLista();
-//		}
-//		if (primeiro.getAtual().toString().charAt(0) < primeiro.getProximo().toString().charAt(0)) {
-//			ordenarLista();
-//			System.out.println("maior");
-//		}
-//		if(primeiro.getAtual().toString().charAt(0) == primeiro.getProximo().toString().charAt(0)){
-//			imprimirLista();
-//		}
-//		imprimirLista();
-	}
-	
-	public void atializarLista(int posição, T valor) {
-		removerPosicao(posição);
-		inserirQualquerPosicao(posição, valor);
+	public void atualizarLista(T valor) {
+		int i = pesquisarPosicao(valor.toString());
+		System.out.println(i);
+		removerPosicao(i);
+		inserirQualquerPosicao(i, valor);
 	}
 }
 

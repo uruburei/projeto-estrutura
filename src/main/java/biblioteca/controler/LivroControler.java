@@ -39,9 +39,7 @@ public class LivroControler {
     	try{
 			Arvore<Livro> tree = (Arvore<Livro>) Banco.deserializar(path);
 
-			Livro requisicao = new Gson().fromJson(req.body(),Livro.class);
-
-			tree.find(requisicao);
+			tree.find(req.params("nome"));
 			if(tree.index != null) {
 				return new Gson().toJson(tree.index);
 			}else {
@@ -58,7 +56,20 @@ public class LivroControler {
     public static String listaLivros(Request req){
         try{
             Arvore<Livro> tree = (Arvore<Livro>) Banco.deserializar(path);
-            return new Gson().toJson(tree);
+            tree.view();
+            return new Gson().toJson(tree.formated);
+        }catch (Exception err){
+            err.printStackTrace();
+            String status = "Erro";
+            return new Gson().toJson(status);
+        }
+    }
+
+    public static String ordenarLista(Request req){
+        try{
+            Arvore<Livro> tree = (Arvore<Livro>) Banco.deserializar(path);
+            tree.inorderRec(tree.root);
+            return new Gson().toJson(tree.sorted);
         }catch (Exception err){
             err.printStackTrace();
             String status = "Erro";

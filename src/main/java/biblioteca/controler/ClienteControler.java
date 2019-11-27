@@ -1,6 +1,7 @@
 package biblioteca.controler;
 import biblioteca.model.*;
 import biblioteca.service.Banco;
+import biblioteca.util.arvore.Arvore;
 import biblioteca.util.lista.Lista;
 
 import com.google.gson.Gson;
@@ -42,9 +43,10 @@ public class ClienteControler {
 
 			Cliente requisicao = new Gson().fromJson(req.body(),Cliente.class);
 
-			list.pesquisarElemento(requisicao);
-			if(list.index != null) {
-				return new Gson().toJson(tree.index);
+			Cliente found = (Cliente) list.pesquisarElemento(requisicao.toString());
+
+			if(found != null) {
+				return new Gson().toJson(found);
 			}else {
 				String status = "Cliente não existe";
 				return new Gson().toJson(status);
@@ -56,16 +58,16 @@ public class ClienteControler {
 		}
 	}
 
-	public static String atualizarCliente(int posicao, Request req){
+	public static String atualizarCliente(Request req){
 		try {
 			Lista<Cliente> list = (Lista<Cliente>) Banco.deserializar(path);
 
 			Cliente requisicao = new Gson().fromJson(req.body(),Cliente.class);
-			list.atializarLista(posicao,requisicao);
+			list.atualizarLista(requisicao);
 
-                Banco.serializar(list,path);
-				return new Gson().toJson(list);
+			Banco.serializar(list,path);
 
+			return new Gson().toJson(list);
 		}catch (Exception err){
 			err.printStackTrace();
 			String status = "Erro";

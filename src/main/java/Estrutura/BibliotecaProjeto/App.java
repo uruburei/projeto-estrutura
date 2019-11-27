@@ -2,6 +2,7 @@ package Estrutura.BibliotecaProjeto;
 import static spark.Spark.*;
 import biblioteca.controler.ClienteControler;
 import biblioteca.controler.LivroControler;
+import biblioteca.controler.OperacoesController;
 
 public class App 
 {
@@ -23,5 +24,8 @@ public class App
         get("/livro/:nome", (req, res) ->{res.type("application/json"); return LivroControler.procurarLivro(req);});
         //Ordenar Livros
         get("/livro/orde/",(req, res) ->{res.type("application/json"); return LivroControler.ordenarLista(req);});
+
+        post("/cliente/livro/:nome", (req, res) ->{res.type("application/json"); return OperacoesController.alugarLivro(req);});
+        delete("/cliente/livro/:nome", (req, res) ->{res.type("application/json"); return OperacoesController.removerLivro(req);});
     }
 }
