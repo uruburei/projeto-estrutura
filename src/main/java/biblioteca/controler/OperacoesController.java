@@ -21,9 +21,14 @@ public class OperacoesController {
 
             Cliente requisicao = new Gson().fromJson(req.body(),Cliente.class);
             Cliente found = (Cliente) clientes.pesquisarElemento(requisicao.toString());
-
+            ArrayList listaCliente;
             livros.find(req.params("nome"));
-            ArrayList listaCliente = new ArrayList();
+            if (found.livros2 != null){
+                listaCliente = found.livros2;
+            }else {
+                listaCliente = new ArrayList();
+            }
+
             listaCliente.add(livros.index);
             livros.deleteKey(req.params("nome"));
 

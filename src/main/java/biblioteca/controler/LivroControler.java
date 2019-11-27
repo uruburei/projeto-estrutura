@@ -38,8 +38,8 @@ public class LivroControler {
     public static String procurarLivro(Request req){
     	try{
 			Arvore<Livro> tree = (Arvore<Livro>) Banco.deserializar(path);
-
-			tree.find(req.params("nome"));
+            Livro livro = new Gson().fromJson(req.body(),Livro.class);
+			tree.find(livro.getNome());
 			if(tree.index != null) {
 				return new Gson().toJson(tree.index);
 			}else {
@@ -55,7 +55,13 @@ public class LivroControler {
 
     public static String listaLivros(Request req){
         try{
-            Arvore<Livro> tree = (Arvore<Livro>) Banco.deserializar(path);
+            Arvore<Livro> tree ;
+            File x = new File(path);
+            if(x.isFile()){
+                tree = (Arvore<Livro>) Banco.deserializar(path);
+            }else {
+                tree = new Arvore<>();
+            }
             tree.view();
             return new Gson().toJson(tree.formated);
         }catch (Exception err){

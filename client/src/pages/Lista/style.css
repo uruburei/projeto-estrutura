@@ -1,0 +1,112 @@
+.main{
+    width: 100%;
+    height: 100%;
+    display: flex;
+}
+
+.navbar{
+    background-color: #fff;
+    width: 5%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-between;
+}
+.navbar h2{
+    color: #6807f9;
+    font-size: 30px;
+    padding: 20px;
+    font-family: 'Gravitas One', cursive;
+}
+.red{
+    background-color: rgb(65, 43, 43);
+    font-size: 14px;
+    padding: 5px 10px;
+    margin: 15px;
+}
+.lista{
+    width: 60%;
+}
+.perfil{
+    width: 35%;
+    padding: 20px;
+    background-color: #232323;
+    border-top-left-radius: 30px;
+    border-bottom-left-radius: 30px;
+}
+.procurar{
+    padding: 10px 20px;
+    font-size: 18px;
+    margin:0 20px;
+}
+.meus{
+    margin: 20px 0;
+}
+.headerList{
+    display: flex;
+    justify-content: center;
+    margin: 20px 0;
+}
+.ordenar{
+    margin: 5px 40px;
+    padding: 5px 10px;
+    font-size: 14px;
+    background-color: transparent;
+    border: 1px solid rgb(180, 180, 180);
+    border-radius: 10px;
+    color: black;
+}
+.listaMain{
+    width: 83%;
+    height: 75%;
+    margin: auto;
+}
+.containerList{
+    margin: 10px 0;
+    height: 100%;
+    overflow-y: auto;
+}
+.perfillista{
+    height: 65vh;
+}
+.item{
+    background-color: white;
+    padding: 5px 30px;
+    border-radius: 40px;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    margin: 10px 0;
+}
+.textContainer{
+    width: 60%;
+    justify-content: space-between;
+    display: flex;
+    flex-direction: row;
+}
+.pegar{
+    padding: 10px 20px;
+    font-size: 14px;
+    background-color: #31e66d;
+}
+.perfilHeader{
+    color: white;
+    font-size: 24px;
+    text-align: end;
+}
+.meusLivros{
+    color: rgb(190, 190, 190);
+    font-size: 18px;
+    margin: 5px;
+}
+.itemperfil{
+    background-color: #353535;
+    color: white;
+    font-size: 14px;
+}
+.devolver{
+    padding: 10px 20px;
+    font-size: 14px;
+    background-color: #a0a0a0;
+}
